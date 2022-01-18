@@ -1,0 +1,42 @@
+import { Node } from "./vendor/https/deno.land/x/router/mod.ts";
+import { hasTrailingSlash, NotFoundHandler } from "./util.ts";
+export class Router {
+    constructor() {
+        this.trees = {};
+    }
+    add(method, path, h) {
+        if (path[0] !== "/") {
+            path = `/${path}`;
+        }
+        if (hasTrailingSlash(path)) {
+            path = path.slice(0, path.length - 1);
+        }
+        let root = this.trees[method];
+        if (!root) {
+            root = new Node();
+            this.trees[method] = root;
+        }
+        root.add(path, h);
+    }
+    find(method, c) {
+        const node = this.trees[method];
+        let path = c.path;
+        if (hasTrailingSlash(path)) {
+            path = path.slice(0, path.length - 1);
+        }
+        let h;
+        if (node) {
+            const [handle, params] = node.find(path);
+            if (params) {
+                for (const [k, v] of params) {
+                    c.params[k] = v;
+                }
+            }
+            if (handle) {
+                h = handle;
+            }
+        }
+        return h ?? NotFoundHandler;
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91dGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicm91dGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSwwQ0FBMEMsQ0FBQztBQUNoRSxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsZUFBZSxFQUFFLE1BQU0sV0FBVyxDQUFDO0FBRTlELE1BQU0sT0FBTyxNQUFNO0lBQW5CO1FBQ0UsVUFBSyxHQUF5QixFQUFFLENBQUM7SUEwQ25DLENBQUM7SUF4Q0MsR0FBRyxDQUFDLE1BQWMsRUFBRSxJQUFZLEVBQUUsQ0FBYztRQUM5QyxJQUFJLElBQUksQ0FBQyxDQUFDLENBQUMsS0FBSyxHQUFHLEVBQUU7WUFDbkIsSUFBSSxHQUFHLElBQUksSUFBSSxFQUFFLENBQUM7U0FDbkI7UUFFRCxJQUFJLGdCQUFnQixDQUFDLElBQUksQ0FBQyxFQUFFO1lBQzFCLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO1NBQ3ZDO1FBRUQsSUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUM5QixJQUFJLENBQUMsSUFBSSxFQUFFO1lBQ1QsSUFBSSxHQUFHLElBQUksSUFBSSxFQUFFLENBQUM7WUFDbEIsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsR0FBRyxJQUFJLENBQUM7U0FDM0I7UUFFRCxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUNwQixDQUFDO0lBRUQsSUFBSSxDQUFDLE1BQWMsRUFBRSxDQUFVO1FBQzdCLE1BQU0sSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDaEMsSUFBSSxJQUFJLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUNsQixJQUFJLGdCQUFnQixDQUFDLElBQUksQ0FBQyxFQUFFO1lBQzFCLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO1NBQ3ZDO1FBQ0QsSUFBSSxDQUEwQixDQUFDO1FBQy9CLElBQUksSUFBSSxFQUFFO1lBQ1IsTUFBTSxDQUFDLE1BQU0sRUFBRSxNQUFNLENBQUMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ3pDLElBQUksTUFBTSxFQUFFO2dCQUNWLEtBQUssTUFBTSxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsSUFBSSxNQUFNLEVBQUU7b0JBQzNCLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2lCQUNqQjthQUNGO1lBRUQsSUFBSSxNQUFNLEVBQUU7Z0JBQ1YsQ0FBQyxHQUFHLE1BQXFCLENBQUM7YUFDM0I7U0FDRjtRQUVELE9BQU8sQ0FBQyxJQUFJLGVBQWUsQ0FBQztJQUM5QixDQUFDO0NBQ0YifQ==

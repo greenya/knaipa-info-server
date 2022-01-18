@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "access-control-allow-origin": "*",
+    "last-modified": "Tue, 18 Jan 2022 14:43:57 GMT",
+    "x-amz-id-2": "pHOnQCDIOPxicLZCMS0E0akkmli+Vzk2YxqOL4Sm+p42AuxHcOBMAuwEGVLM6tc8kx98CXYtL44=",
+    "x-amz-version-id": "TYxN5c52ALKiEul_lBQ59JjieVMqG3xp",
+    "content-type": "application/typescript; charset=utf-8",
+    "cache-control": "public, max-age=31536000, immutable",
+    "etag": "\"e1c41ec86659fb01dba9a585dbf32996\"",
+    "server": "deploy/us-central1-b",
+    "content-length": "103",
+    "date": "Tue, 18 Jan 2022 15:14:20 GMT",
+    "x-amz-request-id": "EX4MVDXR3JNC1QZB"
+  },
+  "url": "https://deno.land/x/bnapi@0.9.5/mod.ts"
+}

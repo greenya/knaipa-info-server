@@ -1,0 +1,10 @@
+{
+  "headers": {
+    "content-length": "0",
+    "server": "deploy/us-central1-b",
+    "x-deno-warning": "Implicitly using latest version (0.9.5) for https://deno.land/x/bnapi/mod.ts",
+    "date": "Tue, 18 Jan 2022 15:14:19 GMT",
+    "location": "/x/bnapi@0.9.5/mod.ts"
+  },
+  "url": "https://deno.land/x/bnapi/mod.ts"
+}
