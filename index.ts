@@ -1,4 +1,4 @@
-import { Application, BadRequestException, NotFoundException } from 'https://deno.land/x/abc/mod.ts'
+import { Application, BadRequestException } from 'https://deno.land/x/abc/mod.ts'
 import * as bnapi from 'https://deno.land/x/bnapi/mod.ts'
 import { Cache } from './cache.ts'
 import * as extra from './extra.ts'
@@ -234,7 +234,7 @@ interface CharProfile {
 
 async function updateCharProfile(name: string, realm: string): Promise<CharProfile> {
     const profile = await bnapi.wow.characterProfile(realm, name)
-    if (profile && profile.guild.id == 65456969) { // Knaipa Variativ
+    if (profile && profile.guild && profile.guild.id == 65456969) { // Knaipa Variativ
         const media = await bnapi.wow.characterMediaAssets(realm, name)
         return {
             spec: profile.active_spec.id,
@@ -253,7 +253,7 @@ async function updateCharProfile(name: string, realm: string): Promise<CharProfi
             renown: profile.covenant_progress?.renown_level
         }
     } else {
-        throw new NotFoundException()
+        throw new Error(`🛑 Failed to update profile: ${name} (${realm})`)
     }
 }
 

@@ -79,7 +79,6 @@ export class Cache {
             try {
                 result = await record.update()
             } catch (e) {
-                this.updaterLog.add(`[update error] message=${e.message}`)
                 result = e
             }
 
@@ -123,15 +122,15 @@ export class Cache {
             hot: (total - pending) / total,
             keys: this.records.size,
             live: this.autoUpdateTimeoutId > 0,
-            token: Deno.env.get('REPLIT_DB_URL') + 'QQ', // TODO: remove when re/storing works fine
+            token: Deno.env.get('REPLIT_DB_URL'),
             log: this.updaterLog.list()
         }
     }
 
     private async set(record: Record, value: unknown, skipStoreSet = false) {
         if (value instanceof Error) {
-            this.log.log('Set error', value)
-            this.updaterLog.add(`[Set error] message=${value.message}`)
+            this.log.log(value.toString())
+            this.updaterLog.add(`[set] ${value.message}`)
             record.error = value
         } else {
             record.error = undefined
@@ -158,8 +157,9 @@ export class Cache {
         if (record.conf.expMinutes == -1) {
             if (record.error) {
                 // TODO: if happens, come up with some proper logic (maybe get rid of "never expire" thing completely)
-                this.log.log('[SHOULD NEVER HAPPEN] Failed to update "never expire" record! Going to try again in 30 sec')
-                this.updaterLog.add('[SHOULD NEVER HAPPEN] Failed to update "never expire" record! Going to try again in 30 sec')
+                const msg = '[SHOULD NEVER HAPPEN] Failed to update "never expire" record! Going to try again in 30 sec'
+                this.log.log(msg)
+                this.updaterLog.add(msg)
                 record.exp = now + 30 * 1000
             }
         } else if (record.conf.expMinutes >= 0) {
@@ -191,7 +191,7 @@ export class Cache {
             try {
                 await this.autoUpdater()
             } catch (e) {
-                this.updaterLog.add(`[autoUpdateNextTimeout error] message=${e.message}`)
+                this.updaterLog.add(`[autoUpdateNextTimeout] ${e.message}`)
             }
         }, 5 * 1000)
     }
