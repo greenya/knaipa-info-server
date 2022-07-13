@@ -118,6 +118,7 @@ interface Recipe {
 }
 
 interface Professions {
+    updatedAt: string,
     professions: Profession[],
     recipes: Recipe[],
     recipeSearchIdx: string,
@@ -159,6 +160,7 @@ async function getRecipe(id: number, name: string, tierId: number, cat: number) 
 
 cache.add('professions', async (): Promise<Professions> => {
     const result: Professions = {
+        updatedAt: new Date().toUTCString(),
         professions: [],
         recipes: [],
         recipeSearchIdx: '',
