@@ -1,5 +1,5 @@
-import { Application, BadRequestException } from 'https://deno.land/x/abc/mod.ts'
-import * as bnapi from 'https://deno.land/x/bnapi/mod.ts'
+import { Application, BadRequestException } from 'https://deno.land/x/abc@v1.3.3/mod.ts'
+import * as bnapi from 'https://deno.land/x/bnapi@0.9.5/mod.ts'
 import { Cache } from './cache.ts'
 import * as extra from './extra.ts'
 import * as loc from './loc.ts'
