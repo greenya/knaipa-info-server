@@ -1,7 +1,0 @@
-export function log(message, ...args) {
-    console.log('[bnapi]', message, ...args);
-}
-export function error(message, ...args) {
-    console.error('[bnapi]', message, ...args);
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInV0aWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0EsTUFBTSxVQUFVLEdBQUcsQ0FBQyxPQUFlLEVBQUUsR0FBRyxJQUFXO0lBQy9DLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFBO0FBQzVDLENBQUM7QUFHRCxNQUFNLFVBQVUsS0FBSyxDQUFDLE9BQWUsRUFBRSxHQUFHLElBQVc7SUFDakQsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUUsT0FBTyxFQUFFLEdBQUcsSUFBSSxDQUFDLENBQUE7QUFDOUMsQ0FBQyJ9

@@ -1,2 +1,0 @@
-export * from "https://deno.land/std@0.99.0/http/cookie.ts";
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29va2llLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29va2llLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWMsNkNBQTZDLENBQUMifQ==
