@@ -3,13 +3,7 @@ import { Log } from './log.ts'
 import { Store } from './store.ts'
 
 interface RecordConfig {
-    /**
-     * -1 for "never expire"
-     */
     expMinutes: number,
-    /**
-     * 0 for "exect" expMinutes value
-     */
     expFuzzyPercent: number
 }
 
@@ -44,8 +38,9 @@ export class Cache {
             throw this.log.error(`Failed to add duplicated "${key}"`)
         } else {
             const conf = Object.assign({}, recordConfigDefault, partialConf)
-            const exp = conf.expMinutes == -1 ? -1 : 0
-            this.records.set(key, { key, exp, conf, update })
+            const record: Record = { key, exp: 0, conf, update }
+            this.updateExp(record)
+            this.records.set(key, record)
         }
     }
 
@@ -61,11 +56,7 @@ export class Cache {
     reset(key: string) {
         if (this.records.has(key)) {
             const record = this.records.get(key)!
-            record.data = undefined
-            record.error = undefined
-            if (record.exp >= 0) {
-                record.exp = 0
-            }
+            record.exp = 0
         } else {
             throw this.log.error(`Failed to reset unknown "${key}"`)
         }
@@ -149,26 +140,15 @@ export class Cache {
     }
 
     private updateNeeded(record: Record, now = Date.now()) {
-        return (record.exp >= 0 && record.exp < now)
-            || (record.conf.expMinutes == -1 && (!record.data || record.error))
+        return record.exp < now
     }
 
     private updateExp(record: Record, now = Date.now()) {
-        if (record.conf.expMinutes == -1) {
-            if (record.error) {
-                // TODO: if happens, come up with some proper logic (maybe get rid of "never expire" thing completely)
-                const msg = '[SHOULD NEVER HAPPEN] Failed to update "never expire" record! Going to try again in 30 sec'
-                this.log.log(msg)
-                this.updaterLog.add(msg)
-                record.exp = now + 30 * 1000
-            }
-        } else if (record.conf.expMinutes >= 0) {
-            let exp = record.conf.expMinutes
-            exp *= 60 * 1000
-            const fuzzy = exp * record.conf.expFuzzyPercent
-            exp -= Math.ceil(fuzzy * Math.random() - fuzzy / 2)
-            record.exp = exp + now
-        }
+        let exp = record.conf.expMinutes
+        exp *= 60 * 1000
+        const fuzzy = exp * record.conf.expFuzzyPercent
+        exp -= Math.ceil(fuzzy * Math.random() - fuzzy / 2)
+        record.exp = exp + now
     }
 
     private autoUpdateEnable() {

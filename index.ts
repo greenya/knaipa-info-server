@@ -32,7 +32,7 @@ cache.add('races', async (): Promise<Race[]> => {
     }))
 
     return races
-}, { expMinutes: -1 })
+}, { expMinutes: 99999999 })
 
 interface Class {
     id: number,
@@ -61,7 +61,7 @@ cache.add('classes', async (): Promise<Class[]> => {
     }
 
     return classes
-}, { expMinutes: -1 })
+}, { expMinutes: 99999999 })
 
 interface Spec {
     id: number,
@@ -83,7 +83,7 @@ cache.add('specs', async (): Promise<Spec[]> => {
     }
 
     return specs
-}, { expMinutes: -1 })
+}, { expMinutes: 99999999 })
 
 interface ProfessionTier {
     id: number,
@@ -215,7 +215,7 @@ cache.add('professions', async (): Promise<Professions> => {
     }
 
     return result
-}, { expMinutes: -1 })
+}, { expMinutes: 99999999 })
 
 interface CharProfile {
     spec: number,
@@ -360,12 +360,6 @@ cache.add('roster', async (): Promise<CharRoster[]> => {
         rank: e.rank > 0 ? e.rank : 1 // make guild master (0) appear as officer (1)
     }))
 }, { expMinutes: 10 })
-
-await cache.update('auth') // required to do any bnapi request
-await cache.update('roster') // populate cache with character keys
-await cache.load()
-
-cache.live()
 
 // ###############################################################################
 
@@ -513,8 +507,11 @@ function generateRankings() {
 
 // ###############################################################################
 
-const appPort = 8080
-const appStartedAt = Date.now()
+await cache.update('auth') // required to do any bnapi request
+await cache.update('roster') // populate cache with character keys
+await cache.load()
+
+cache.live()
 
 const app = new Application()
 
@@ -594,6 +591,9 @@ app.pre(next => c => {
     c.response.headers.set('Access-Control-Allow-Origin', '*')
     return next(c)
 })
+
+const appPort = 8080
+const appStartedAt = Date.now()
 
 app.start({ port: appPort })
 console.log(`Running server http://localhost:${appPort}/... 🦕`)
