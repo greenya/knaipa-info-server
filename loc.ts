@@ -310,7 +310,7 @@ const knownTexts: { [_:string]: It } = {
     'Mass Milling':             { it: 'масовий помел' },
     'Mass Prospecting':         { it: 'масове просіювання' },
     'Materials':                { it: 'матеріали' },
-    'Meat Dishes':              { it: 'м\ясні страви' },
+    'Meat Dishes':              { it: 'м\'ясні страви' },
     'Meta Gems':                { it: 'мета-самоцвіти' },
     'Mining Techniques':        { it: 'техніки гірництва' },
     'Mount Equipment':          { it: 'обладнання засобів пересування' },
