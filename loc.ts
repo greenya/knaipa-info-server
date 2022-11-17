@@ -72,6 +72,8 @@ const knownProfessions: { [_:number]: ItThey } = {
     // 2787: { it: 'Abominable Stitchin', they: 'abominable stitchers' }
     // 2791: { it: 'Ascension Crafting', they: 'ascension crafters' }
     // 2811: { it: 'Stygia Crafting', they: 'stygia crafters' }
+    // 2821: { it: 'Arcana Manipulation' }
+    // 2847: { it: 'Tuskarr Fishing Gear' }
 }
 
 export function profession(id: number) {
@@ -88,6 +90,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2476: { it: 'ковальство Позамежжя' },
     2477: { it: 'ковальство' },
     2751: { it: 'ковальство Тінеземель' },
+    2822: { it: 'ковальство Драконових островів' },
 
     2525: { it: 'шкірництво Кул-Тірасу' }, // omit Zandalari
     2526: { it: 'шкірництво Легіону' },
@@ -98,6 +101,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2531: { it: 'шкірництво Позамежжя' },
     2532: { it: 'шкірництво' },
     2758: { it: 'шкірництво Тінеземель' },
+    2830: { it: 'шкірництво Драконових островів' },
 
     2478: { it: 'алхімія Кул-Тірасу' }, // omit Zandalari
     2479: { it: 'алхімія Легіону' },
@@ -108,6 +112,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2484: { it: 'алхімія Позамежжя' },
     2485: { it: 'алхімія' },
     2750: { it: 'алхімія Тінеземель' },
+    2823: { it: 'алхімія Драконових островів' },
 
     2549: { it: 'травництво Кул-Тірасу' }, // omit Zandalari
     2550: { it: 'травництво Легіону' },
@@ -118,6 +123,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2555: { it: 'травництво Позамежжя' },
     2556: { it: 'травництво' },
     2760: { it: 'травництво Тінеземель' },
+    2832: { it: 'травництво Драконових островів' },
 
     2541: { it: 'куховарство Кул-Тірасу' }, // omit Zandalari
     2542: { it: 'куховарство Легіону' },
@@ -128,6 +134,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2547: { it: 'куховарство Позамежжя' },
     2548: { it: 'куховарство' },
     2752: { it: 'куховарство Тінеземель' },
+    2824: { it: 'куховарство Драконових островів' },
 
     2565: { it: 'гірництво Кул-Тірасу' }, // omit Zandalari
     2566: { it: 'гірництво Легіону' },
@@ -138,6 +145,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2571: { it: 'гірництво Позамежжя' },
     2572: { it: 'гірництво' },
     2761: { it: 'гірництво Тінеземель' },
+    2833: { it: 'гірництво Драконових островів' },
 
     2533: { it: 'кравецтво Кул-Тірасу' }, // omit Zandalari
     2534: { it: 'кравецтво Легіону' },
@@ -148,6 +156,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2539: { it: 'кравецтво Позамежжя' },
     2540: { it: 'кравецтво' },
     2759: { it: 'кравецтво Тінеземель' },
+    2831: { it: 'кравецтво Драконових островів' },
 
     2499: { it: 'інженерія Кул-Тірасу' }, // omit Zandalari
     2500: { it: 'інженерія Легіону' },
@@ -158,6 +167,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2505: { it: 'інженерія Позамежжя' },
     2506: { it: 'інженерія' },
     2755: { it: 'інженерія Тінеземель' },
+    2827: { it: 'інженерія Драконових островів' },
 
     2486: { it: 'зачаровування Кул-Тірасу' }, // omit Zandalari
     2487: { it: 'зачаровування Легіону' },
@@ -168,6 +178,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2493: { it: 'зачаровування Позамежжя' },
     2494: { it: 'зачаровування' },
     2753: { it: 'зачаровування Тінеземель' },
+    2825: { it: 'зачаровування Драконових островів' },
 
     2585: { it: 'рибальство Кул-Тірасу' }, // omit Zandalari
     2586: { it: 'рибальство Легіону' },
@@ -178,6 +189,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2591: { it: 'рибальство Позамежжя' },
     2592: { it: 'рибальство' },
     2754: { it: 'рибальство Тінеземель' },
+    2826: { it: 'рибальство Драконових островів' },
 
     2557: { it: 'шкуродерство Кул-Тірасу' }, // omit Zandalari
     2558: { it: 'шкуродерство Легіону' },
@@ -188,6 +200,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2563: { it: 'шкуродерство Позамежжя' },
     2564: { it: 'шкуродерство' },
     2762: { it: 'шкуродерство Тінеземель' },
+    2834: { it: 'шкуродерство Драконових островів' },
 
     2517: { it: 'ювелірне мистецтво Кул-Тірасу' }, // omit Zandalari
     2518: { it: 'ювелірне мистецтво Легіону' },
@@ -198,6 +211,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2523: { it: 'ювелірне мистецтво Позамежжя' },
     2524: { it: 'ювелірне мистецтво' },
     2757: { it: 'ювелірне мистецтво Тінеземель' },
+    2829: { it: 'ювелірне мистецтво Драконових островів' },
 
     2507: { it: 'писання Кул-Тірасу' }, // omit Zandalari
     2508: { it: 'писання Легіону' },
@@ -208,11 +222,122 @@ const knownProfessionTeirs: { [_:number]: It } = {
     2513: { it: 'писання Позамежжя' },
     2514: { it: 'писання' },
     2756: { it: 'писання Тінеземель' },
+    2828: { it: 'писання Драконових островів' },
 }
 
 export function professionTier(id: number) {
     return knownProfessionTeirs[id]
 }
+
+// TODO: add localization for following texts into knownTexts
+
+// Quest Schematics
+// Profession Equipment
+// Finishing Reagents
+// Recrafting
+// Quest Techniques
+// Bait Recipes
+// Fishing Lure Recipes
+// Refinement
+// Skinning Details
+// Consumable Tools
+// Profession Tools and Accessories
+// Finishing Reagents
+// Stonework
+// Dragonriding
+// Quest Plans
+// Recrafting
+// Quest Formulas
+// Recrafting
+// Profession Tool Enchantments
+// Rods and Wands
+// Magical Merchandise
+// Illusory Goods
+// Finishing Reagents
+// Quest Techniques
+// Refinement
+// Section I - Hochenblume
+// Section III - Saxifrage
+// Section IV - Writhebark
+// Section II - Bubble Poppy
+// Appendix II - Overload
+// Appendix I - Boundless Knowledge
+// Quest Techniques
+// Refinement
+// Section II - Draconium
+// Section I - Serevite
+// Appendix II - Overload
+// Appendix I - Boundless Knowledge
+// Section III - Khaz'gorite
+// Hats & Accessories
+// Chronocloth Garments
+// Azureweave Garments
+// Garments
+// Embroidered Bags
+// Assorted Embroidery
+// Finishing Reagents
+// Profession Garments
+// Woven Cloth
+// Tailoring Essentials
+// Experiments
+// Quest Patterns
+// Milling // x9
+// Runes and Sigils
+// Quest Techniques
+// Inscription Essentials
+// Dragonriding - Windborne Velocidrake
+// Dragonriding - Renewed Proto-Drake
+// Dragonriding - Highland Drake
+// Dragonriding - Cliffside Wylderdrake
+// Profession Equipment
+// Profession Specialization
+// Missives
+// Mysteries
+// Crafting Tool Missives
+// Gathering Tool Missives
+// Ingredients
+// Beverages
+// Meat Meals
+// Simple Fish Dishes
+// Deluxe Fish Dishes
+// Great Feasts
+// Freshwater
+// Saltwater
+// General Fishing
+// Specialty Fishing
+// Profession Equipment
+// Decayed Patterns
+// Bestial Patterns
+// Elemental Patterns
+// Finishing Reagents
+// Quest Patterns
+// Recrafting
+// Air Phials
+// Frost Phials
+// Frost Potions
+// Elemental Phials and Potions
+// Air Potions
+// Alchemist Stones
+// Transmutations
+// Incense
+// Finishing Reagents
+// Alchemy Essentials
+// Quest Recipes
+// Prospecting // x8
+// Rudimentary Gems
+// Air Gems
+// Earth Gems
+// Frost Gems
+// Fire Gems
+// Primalist Gems
+// Miscellaneous
+// Statues & Carvings
+// Battle Pets
+// Novelties
+// Profession Equipment
+// Extravagant Glasswares
+// Jewelcrafting Essentials
+// Quest Designs
 
 const knownTexts: { [_:string]: It } = {
     'Anti-Venoms':              { it: 'протиотрути' },
