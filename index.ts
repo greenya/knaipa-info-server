@@ -1,3 +1,4 @@
+import 'https://deno.land/std@0.165.0/dotenv/load.ts'
 import { Application, BadRequestException } from 'https://deno.land/x/abc@v1.3.3/mod.ts'
 import * as bnapi from 'https://deno.land/x/bnapi@0.9.5/mod.ts'
 import { Cache } from './cache.ts'
