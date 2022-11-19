@@ -1,6 +1,5 @@
 import 'https://deno.land/std@0.165.0/dotenv/load.ts'
-import { Application, BadRequestException } from 'https://deno.land/x/abc@v1.3.3/mod.ts'
-import * as bnapi from 'https://deno.land/x/bnapi@0.9.5/mod.ts'
+import { abc, bnapi } from './deps.ts'
 import { Cache } from './cache.ts'
 import * as extra from './extra.ts'
 import * as loc from './loc.ts'
@@ -367,7 +366,7 @@ cache.add('roster', async (): Promise<CharRoster[]> => {
 function searchRecipe(text: string, cursor = 0) {
     text = text.trim().toLowerCase()
     if (text.length < 2) {
-        throw new BadRequestException('Search text too short')
+        throw new abc.BadRequestException('Search text too short')
     }
 
     const professions = cache.get<Professions>('professions')!
@@ -514,7 +513,7 @@ await cache.load()
 
 cache.live()
 
-const app = new Application()
+const app = new abc.Application()
 
 app.get('/info', () => ({
     uptime: Math.ceil((Date.now() - appStartedAt) / 1000),
