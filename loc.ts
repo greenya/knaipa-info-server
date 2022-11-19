@@ -37,7 +37,7 @@ const knownClasses: { [_:number]: MasFemMul } = {
     1: { mas: 'воїн', fem: 'воїтелька', mul: 'воїни' },
     2: { mas: 'паладин', fem: 'паладинка', mul: 'паладини' },
     3: { mas: 'мисливець', fem: 'мисливиця', mul: 'мисливці' },
-    4: { mas: 'пройдисвіт', fem: 'пройдисвітка', mul: 'пройдисвіти' },
+    4: { mas: 'розбійник', fem: 'розбійниця', mul: 'розбійники' },
     5: { mas: 'жрець', fem: 'жриця', mul: 'жерці' },
     6: { mas: 'лицар смерті', fem: 'лицарка смерті', mul: 'лицарі смерті' },
     7: { mas: 'шаман', fem: 'шаманка', mul: 'шамани' },
@@ -80,7 +80,7 @@ export function profession(id: number) {
     return knownProfessions[id]
 }
 
-const knownProfessionTeirs: { [_:number]: It } = {
+const knownProfessionTiers: { [_:number]: It } = {
     2437: { it: 'ковальство Кул-Тірасу' }, // omit Zandalari
     2454: { it: 'ковальство Легіону' },
     2472: { it: 'ковальство Дренору' },
@@ -226,7 +226,7 @@ const knownProfessionTeirs: { [_:number]: It } = {
 }
 
 export function professionTier(id: number) {
-    return knownProfessionTeirs[id]
+    return knownProfessionTiers[id]
 }
 
 // TODO: add localization for following texts into knownTexts
@@ -402,7 +402,7 @@ const knownTexts: { [_:string]: It } = {
     'Fist Weapons':             { it: 'кулакова зброя' },
     'Flasks':                   { it: 'фляги' },
     'Focus':                    { it: 'фокусування' },
-    'Follower Equipment':       { it: 'обладання попутників' },
+    'Follower Equipment':       { it: 'обладнання попутників' },
     'Food of Draenor':          { it: 'їжа Дренору' },
     'Gathering Techniques':     { it: 'техніки збору' },
     'Gauntlets':                { it: 'рукавиці' },
