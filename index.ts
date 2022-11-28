@@ -324,7 +324,7 @@ interface CharRoster {
 
 cache.add('roster', async (): Promise<CharRoster[]> => {
     const members = await bnapi.wow.guildRoster('terokkar', 'knaipa-variativ')
-    const maxLevelMembers = members.filter(e => e.character.level == 60)
+    const maxLevelMembers = members.filter(e => e.character.level >= 60) // TODO: set to max level after +/- 01 Jan 2023; note: the ui message still says "N character of max level" (which will be incorrect while we have ">=60")
 
     for (let i = 0; i < maxLevelMembers.length; i++) {
         const m = maxLevelMembers[i]
