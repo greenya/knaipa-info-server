@@ -542,6 +542,7 @@ const app = new abc.Application()
 app.get('/info', () => ({
     uptime: Math.ceil((Date.now() - appStartedAt) / 1000),
     boottime: (appStartedAt - appBootedAt) / 1000,
+    bnapi: bnapi.stats(),
     ...cache.info()
 }))
 
