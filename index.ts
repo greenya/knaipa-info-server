@@ -168,6 +168,7 @@ cache.add('professions', async (): Promise<Professions> => {
     }
 
     console.log('Updating professions...')
+    const skippedRecipes: { id: number, message: string }[] = []
 
     for (const { id: profId } of await bnapi.wow.professions()) {
         const prof = await bnapi.wow.profession(profId)
@@ -189,13 +190,34 @@ cache.add('professions', async (): Promise<Professions> => {
             for (const { recipes, name: catName } of categories || []) {
                 const cat = tier.cats.push(catName) - 1
                 for (const { id, name } of recipes) {
+                    let newName = name
+
                     if (name.includes('|')) {
-                        console.log('Recipe name has special characters and will be skipped:', id, name)
-                    } else {
-                        const recipe = await getRecipe(id, name, tier.id, cat)
-                        result.recipes.push(recipe)
+                        newName = name.replaceAll('|', '_')
+                        console.log(`Recipe ${id} has name with special characters that will be removed`)
+                        console.log(`Original name  : ${name}`)
+                        console.log(`New name       : ${newName}`)
+                    }
+
+                    // try to retrieve recipe maxRetries times; if no luck -- we skip it completely
+                    const maxRetries = 3
+                    for (let retry = 1; retry <= maxRetries; retry++) {
+                        try {
+                            const recipe = await getRecipe(id, newName, tier.id, cat)
+                            result.recipes.push(recipe)
+                            break
+                        } catch ({ message }) {
+                            if (retry == maxRetries) {
+                                console.log('Out of retries. The recipe is skipped.')
+                                skippedRecipes.push({ id, message })
+                            } else {
+                                console.log(`Failed to get recipe #${id}; retrying again soon... [${retry}/${maxRetries}]`)
+                                await new Promise(r => setTimeout(r, 5000))
+                            }
+                        }
                     }
                 }
+
                 console.log('Current recipes count:', result.recipes.length)
                 await new Promise(r => setTimeout(r, 1000))
             }
@@ -213,6 +235,8 @@ cache.add('professions', async (): Promise<Professions> => {
         result.recipeSearchPos.push(result.recipeSearchIdx.length)
         result.recipeSearchIdx += result.recipes[i].name.toLowerCase() + '|'
     }
+
+    console.log('All done. Skipped recipes:', skippedRecipes)
 
     return result
 }, { expMinutes: 99999999 })
