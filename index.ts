@@ -324,11 +324,16 @@ async function updateCharProfessions(name: string, realm: string): Promise<CharP
     }
 
     const profs = await bnapi.wow.characterProfessions(realm, name)
-    for (const { profession, tiers } of [ ...(profs.primaries || []), ...(profs.secondaries || []) ]) {
-        result.professions.push(profession.id)
-        for (const { known_recipes: recipes } of tiers || []) {
-            for (const { id } of recipes || []) {
-                result.recipes.push(id)
+    if (profs) {
+        for (const { profession, tiers } of [
+            ...(profs.primaries || []),
+            ...(profs.secondaries || [])
+        ]) {
+            result.professions.push(profession.id)
+            for (const { known_recipes: recipes } of tiers || []) {
+                for (const { id } of recipes || []) {
+                    result.recipes.push(id)
+                }
             }
         }
     }
