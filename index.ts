@@ -584,12 +584,17 @@ app.get('/roster', () => cache.get('roster'))
 
 app.get('/char/:char', c => {
     const key = 'char-profile-' + decodeURIComponent(c.params.char).toLowerCase()
-    const { spec, login, avatar, inset } = cache.get<CharProfile>(key)!
-    return {
-        spec,
-        login,
-        avatar,
-        inset
+    const profile = cache.get<CharProfile>(key)
+    if (profile) {
+        const { spec, login, avatar, inset } = profile
+        return {
+            spec,
+            login,
+            avatar,
+            inset
+        }
+    } else {
+        c.response.status = 404
     }
 })
 
